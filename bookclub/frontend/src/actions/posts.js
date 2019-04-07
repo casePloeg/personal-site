@@ -32,7 +32,6 @@ export const getPosts = () => (dispatch, getState) => {
   let statusText;
   fetch("/api/posts/", config)
     .then(res => {
-      console.log(res);
       ok = res.ok;
       statusText = res.statusText;
       return res.json();

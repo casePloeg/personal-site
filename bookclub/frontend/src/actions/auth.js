@@ -56,9 +56,6 @@ export const loadUser = () => (dispatch, getState) => {
 
 // LOGIN USER
 export const login = (username, password) => dispatch => {
-  console.log("hello");
-  // Request Body
-
   // Headers
   const config = {
     headers: {
@@ -79,7 +76,6 @@ export const login = (username, password) => dispatch => {
     })
     .then(response => {
       if (ok) {
-        console.log(response);
         dispatch({
           type: LOGIN_SUCCESS,
           payload: response
@@ -112,7 +108,6 @@ export const logout = () => (dispatch, getState) => {
     config.headers["Authorization"] = `Token ${token}`;
   }
 
-  console.log(config);
   let ok;
   let statusText;
   fetch("/api/auth/logout/", config)
@@ -120,7 +115,6 @@ export const logout = () => (dispatch, getState) => {
       ok = res.ok;
       statusText = res.statusText;
       if (ok) {
-        console.log("response");
         dispatch({ type: LOGOUT_SUCCESS });
       } else {
         throw "rip";
