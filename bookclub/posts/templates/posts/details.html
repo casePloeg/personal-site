@@ -1,0 +1,10 @@
+{% extends 'posts/layout.html' %} {% block content %}
+<!-- data pasted in through view object-->
+<h1>{{ post.title }}</h1>
+<div>
+  {{ post.body }}
+</div>
+<div>
+  {{ post.created_at }}
+</div>
+{% endblock %}
