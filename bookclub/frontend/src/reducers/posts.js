@@ -1,8 +1,9 @@
 import {
   GET_POSTS,
+  GET_POST,
+  GET_IDS,
   DELETE_POST,
-  ADD_POST,
-  LOGOUT_SUCCESS
+  ADD_POST
 } from "../actions/types.js";
 
 const initialState = {
@@ -15,6 +16,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: action.payload ? action.payload : []
+      };
+    case GET_POST:
+      return {
+        ...state,
+        post: action.payload ? action.payload : {}
       };
     case DELETE_POST:
       return {

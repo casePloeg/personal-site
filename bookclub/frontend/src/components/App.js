@@ -53,11 +53,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-// import { Provider as AlertProvider } from "react-alert";
-// import AlertTemplate from "react-alert-template-basic";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
-// import { Provider } from "react-redux";
-// import store from "../store";
+import { Provider } from "react-redux";
+import store from "../store";
 import "../App.css";
 import Home from "./Home";
 import Blog from "./Blog";
@@ -67,21 +67,31 @@ import Footer from "./Footer";
 
 import NotFound from "./NotFound";
 import P5Wrapper from "./P5Wrapper";
+
+const alertOptions = {
+  timeout: 3000,
+  position: "top center"
+};
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <div className="content">
-          <Switch>
-            <Route exact path={ROUTES.HOME} component={Home} />
-            <Route path={ROUTES.BLOG} component={Blog} />
-            <Route path={ROUTES.HOME} component={NotFound} />
-          </Switch>
-        </div>
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Router>
+          <div className="App">
+            <div className="content">
+              <Switch>
+                <Route exact path={ROUTES.HOME} component={Home} />
+                <Route path={ROUTES.BLOG} component={Blog} />
+                <Route path={ROUTES.HOME} component={NotFound} />
+              </Switch>
+            </div>
 
-        <Footer />
-      </div>
-    </Router>
+            <Footer />
+          </div>
+        </Router>
+      </AlertProvider>
+    </Provider>
   );
 }
 

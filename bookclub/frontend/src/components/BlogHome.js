@@ -4,7 +4,15 @@ import * as ROUTES from "../constants/routes";
 import BlogEntry from "./BlogEntry";
 import Header from "./Header";
 
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getPosts } from "../actions/posts";
+
 class BlogHome extends Component {
+  static propTypes = {
+    posts: PropTypes.array.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -12,32 +20,30 @@ class BlogHome extends Component {
   }
 
   componentDidMount() {
-    // last 5 entries are added (most recent is last)
-    // this.props.firebase.db
-    //   .ref("/blog/")
-    //   .orderByChild("created")
-    //   .limitToLast(3)
-    //   .once("value")
-    //   .then(snap =>
-    //     this.setState(prevState => (prevState["entries"] = snap.val()))
-    //   );
+    // get the 3 most recent posts
+    this.props.getPosts(3);
   }
 
   render() {
-    let blogEntries = [];
+    console.log(this.props.posts);
+    // let blogEntries = [];
+    let posts = [];
+    posts = this.props.posts.map(post => (
+      <BlogEntry key={post.id} frontpage={true} {...post} />
+    ));
 
-    for (let key in this.state.entries) {
-      if (this.state.entries.hasOwnProperty(key)) {
-        blogEntries.push(<BlogEntry id={this.state.entries[key].id} />);
-      }
-    }
-    blogEntries = blogEntries.reverse();
+    // for (let key in this.state.entries) {
+    //   if (this.state.entries.hasOwnProperty(key)) {
+    //     blogEntries.push(<BlogEntry id={this.state.entries[key].id} />);
+    //   }
+    // }
+    // blogEntries = blogEntries.reverse();
 
     return (
       <div>
         <Header class={"align-right"} />
         <div className="blog-content">
-          {blogEntries}
+          {posts}
           <Link to={ROUTES.ARCHIVE}>Older posts</Link>
         </div>
       </div>
@@ -45,4 +51,11 @@ class BlogHome extends Component {
   }
 }
 
-export default BlogHome;
+const mapStateToProps = state => ({
+  posts: state.posts.posts
+});
+
+export default connect(
+  mapStateToProps,
+  { getPosts }
+)(BlogHome);

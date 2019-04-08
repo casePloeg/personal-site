@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-
 import compile from "../constants/compile";
-
 import { Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import "../App.css";
-// const marksy = require('marksy').marksy
 
+import moment from "moment";
 class BlogEntryBase extends Component {
   constructor(props) {
     super(props);
@@ -14,53 +12,26 @@ class BlogEntryBase extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    // if rendered with an id prop
+  componentDidMount() {
     if (this.props.id) {
-      // this.props.firebase.db
-      //   .ref("/blog/" + this.props.id)
-      //   .once("value")
-      //   .then(snap => {
-      //     let id = snap.val().id;
-      //     let title = snap.val().title;
-      //     let created = snap.val().created;
-      //     let text = snap.val().text;
-      //     let compiled = compile(text, {});
-      //     let content = compiled.tree;
-      //     let toc = compiled.tree;
-      //     this.setState(prevState => ({
-      //       id: id,
-      //       title: title,
-      //       created: created,
-      //       content: content,
-      //       toc: toc,
-      //       frontpage: true
-      //     }));
+      console.log(this.props);
+
+      let compiled = compile(this.props.body, {});
+      let content = compiled.tree;
+      let toc = compiled.tree;
+      let date = new Date(this.props.created_at);
+      // formate the date with moment.js
+      let created = moment(date).format("LL");
+
+      this.setState(prevState => ({
+        id: this.props.id,
+        title: this.props.title,
+        created: created,
+        content: content,
+        toc: toc,
+        frontpage: this.props.frontpage
+      }));
       // });
-    } else {
-      // if rendered with id from url
-      // this.props.firebase.db
-      //   .ref("/blog/" + this.props.match.params.id)
-      //   .once("value")
-      //   .then(snap => {
-      //     if (snap.val()) {
-      //       let id = snap.val().id;
-      //       let title = snap.val().title;
-      //       let created = snap.val().created;
-      //       let text = snap.val().text;
-      //       let compiled = compile(text, {});
-      //       let content = compiled.tree;
-      //       let toc = compiled.tree;
-      //       this.setState(prevState => ({
-      //         id: id,
-      //         title: title,
-      //         created: created,
-      //         content: content,
-      //         toc: toc,
-      //         frontpage: false
-      //       }));
-      //     }
-      //   });
     }
   }
 

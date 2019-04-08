@@ -12,14 +12,7 @@ class Archive extends Component {
   }
 
   componentDidMount() {
-    // last 5 entries are added (most recent is last)
-    // this.props.firebase.db
-    //   .ref("/blog/")
-    //   .orderByChild("created")
-    //   .once("value")
-    //   .then(snap =>
-    //     this.setState(prevState => (prevState["entries"] = snap.val()))
-    //   );
+    // get dates and ids of all posts
   }
 
   render() {

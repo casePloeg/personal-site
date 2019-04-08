@@ -8,3 +8,9 @@ class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
         fields = '__all__'
+
+
+class PostIdsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Posts
+        fields = ['id', 'created_at']

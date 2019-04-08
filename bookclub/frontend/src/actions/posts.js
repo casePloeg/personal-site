@@ -1,6 +1,12 @@
 import axios from "axios";
 
-import { GET_POSTS, DELETE_POST, ADD_POST, GET_ERRORS } from "./types";
+import {
+  GET_POSTS,
+  GET_POST,
+  DELETE_POST,
+  ADD_POST,
+  GET_ERRORS
+} from "./types";
 
 // RETURN ERRORS
 export const returnErrors = (msg, status) => {
@@ -11,7 +17,7 @@ export const returnErrors = (msg, status) => {
 };
 
 // GET POSTS
-export const getPosts = () => (dispatch, getState) => {
+export const getPosts = numPosts => (dispatch, getState) => {
   // Get token from state
   const token = getState().auth.token;
 
@@ -30,7 +36,7 @@ export const getPosts = () => (dispatch, getState) => {
 
   let ok;
   let statusText;
-  fetch("/api/posts/", config)
+  fetch(`/api/posts/?num=${numPosts}`, config)
     .then(res => {
       ok = res.ok;
       statusText = res.statusText;
@@ -47,6 +53,52 @@ export const getPosts = () => (dispatch, getState) => {
       }
     })
     .catch(data => dispatch(returnErrors(data, statusText)));
+};
+
+// GET INDIVIDUAL POST
+export const getPost = id => (dispatch, getState) => {
+  // Get token from state
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  };
+
+  // If token add to headers config
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+
+  let ok;
+  let statusText;
+  let promise = new Promise(function(resolve, reject) {
+    fetch(`/api/posts/${id}`, config)
+      .then(res => {
+        ok = res.ok;
+        statusText = res.statusText;
+        return res.json();
+      })
+      .then(response => {
+        if (ok) {
+          dispatch({
+            type: GET_POST,
+            payload: response
+          });
+          resolve();
+        } else {
+          throw response;
+        }
+      })
+      .catch(data => {
+        dispatch(returnErrors(data, statusText));
+        reject();
+      });
+  });
+  return promise;
 };
 
 // DELETE POST

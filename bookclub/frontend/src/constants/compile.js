@@ -36,8 +36,11 @@ const compile = marksy({
     p({ children }) {
       //console.log(children);
       let regex = /(<cite>)(.*)(<\/cite>)/;
-      let ret = children[0].match(regex);
-      console.log(children, ret);
+      let ret = null;
+      if (children[0]) {
+        let ret = children[0].match(regex);
+      }
+
       if (ret) {
         return <cite className="align-right">{ret[2]}</cite>;
       } else {

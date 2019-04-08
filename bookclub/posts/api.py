@@ -1,20 +1,45 @@
 from posts.models import Posts
 from rest_framework import viewsets, permissions
-from .serializers import PostsSerializer
+from .serializers import PostsSerializer, PostIdsSerializer
 
 # Lead Viewset
 
 
 class PostsViewSet(viewsets.ModelViewSet):
 
-    # queryset = Posts.objects.all()
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
 
     serializer_class = PostsSerializer
 
-    queryset = Posts.objects.all()
+    def get_queryset(self):
+        """
+        Optionally restricts the of post returned by filtering for a number
+        """
+        # in reversed order
+        queryset = Posts.objects.all().order_by('-created_at')
+        numPosts = self.request.query_params.get('num', None)
+
+        # if the param given is a number, splice by that amount
+        if numPosts is not None and numPosts.isdigit():
+            queryset = queryset[:int(numPosts)]
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class PostIdsViewSet(viewsets.ModelViewSet):
+
+    # queryset = Posts.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
+
+    serializer_class = PostIdsSerializer
+
+    queryset = Posts.objects.all().order_by('created_at')
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
