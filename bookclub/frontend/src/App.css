@@ -1,0 +1,110 @@
+:root {
+  --main-text-color: black;
+  --main-background: #f7f8d2;
+  background: var(--main-background);
+  overflow-x: hidden;
+}
+p {
+  font-size: 120%;
+}
+.App {
+}
+
+.content {
+  min-height: 90vh;
+  width: 100%;
+}
+.footer {
+  text-align: center;
+  height: 5vh;
+}
+
+.hide {
+  display: none;
+}
+
+.comment_list {
+  display: show;
+}
+
+.comment_form {
+  display: grid;
+  flex-direction: column;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.epigraph {
+  padding-left: 10%;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+}
+
+.bentry {
+}
+.blog-content {
+}
+
+/* LITTLE SCREENS */
+
+@media screen and (max-width: 990px) {
+  .blog {
+    margin: auto;
+    min-width: 50vw;
+    max-width: 80vw;
+    margin-top: 10vh;
+  }
+}
+
+/*  BIG SCREENS */
+
+@media screen and (min-width: 990px) {
+  .blog {
+    margin: auto;
+    margin-top: 15vh;
+    width: 50vw;
+  }
+}
+
+/* A link that has not been visited */
+a:link {
+  color: var(--main-text-color);
+}
+
+/* A link that has been visited */
+a:visited {
+  color: var(--main-text-color);
+}
+
+/* A link that is hovered on */
+a:hover {
+  color: var(--main-text-color);
+}
+
+/* A link that is selected */
+a:active {
+  color: var(--main-text-color);
+}
+
+.home-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.blog-wrapper {
+  display: flex;
+}
+
+.home {
+  margin: auto;
+  margin-top: 20vh;
+  text-align: center;
+}
+
+.p5wrapper {
+  position: absolute;
+  z-index: -1;
+}

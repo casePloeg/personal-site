@@ -17,14 +17,16 @@ Including another URLconf
 # from django.urls import path, include
 
 
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.views.generic.base import TemplateView
+from django.conf import settings
 from django.contrib import admin
 from rest_framework import routers
 
-
+# potentially redirect everything back to front end, downside is actual 404 error is not raised, react-router just catches it
 urlpatterns = [
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
     path('', include('accounts.urls')),
-    path('admin/', admin.site.urls)
+    path('admin', admin.site.urls),
 ]
