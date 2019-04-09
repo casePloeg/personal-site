@@ -1,12 +1,18 @@
-import axios from "axios";
-
 import {
   GET_POSTS,
   GET_POST,
   DELETE_POST,
   ADD_POST,
-  GET_ERRORS
+  GET_ERRORS,
+  CLEAR_POSTS
 } from "./types";
+
+// CLEAR ALL POSTS
+export const clearPosts = () => (dispatch, getState) => {
+  dispatch({
+    type: CLEAR_POSTS
+  });
+};
 
 // RETURN ERRORS
 export const returnErrors = (msg, status) => {
@@ -18,9 +24,6 @@ export const returnErrors = (msg, status) => {
 
 // GET POSTS
 export const getPosts = numPosts => (dispatch, getState) => {
-  // Get token from state
-  const token = getState().auth.token;
-
   // Headers
   const config = {
     headers: {
@@ -28,11 +31,6 @@ export const getPosts = numPosts => (dispatch, getState) => {
     },
     method: "GET"
   };
-
-  // If token add to headers config
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
 
   let ok;
   let statusText;
@@ -57,9 +55,6 @@ export const getPosts = numPosts => (dispatch, getState) => {
 
 // GET INDIVIDUAL POST
 export const getPost = id => (dispatch, getState) => {
-  // Get token from state
-  const token = getState().auth.token;
-
   // Headers
   const config = {
     headers: {
@@ -67,11 +62,6 @@ export const getPost = id => (dispatch, getState) => {
     },
     method: "GET"
   };
-
-  // If token add to headers config
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
 
   let ok;
   let statusText;
@@ -99,6 +89,37 @@ export const getPost = id => (dispatch, getState) => {
       });
   });
   return promise;
+};
+
+// GET POSTS WITHOUT BODY
+export const getPostLinks = () => (dispatch, getState) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  };
+
+  let ok;
+  let statusText;
+  fetch(`/api/postlinks`, config)
+    .then(res => {
+      ok = res.ok;
+      statusText = res.statusText;
+      return res.json();
+    })
+    .then(response => {
+      if (ok) {
+        dispatch({
+          type: GET_POSTS,
+          payload: response.results.map(result => ({ ...result, body: "" }))
+        });
+      } else {
+        throw response;
+      }
+    })
+    .catch(data => dispatch(returnErrors(data, statusText)));
 };
 
 // DELETE POST

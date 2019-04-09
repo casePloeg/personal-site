@@ -1,6 +1,6 @@
 from posts.models import Posts
 from rest_framework import viewsets, permissions
-from .serializers import PostsSerializer, PostIdsSerializer
+from .serializers import PostsSerializer, PostLinksSerializer
 
 # Lead Viewset
 
@@ -26,20 +26,14 @@ class PostsViewSet(viewsets.ModelViewSet):
             queryset = queryset[:int(numPosts)]
         return queryset
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
-
-class PostIdsViewSet(viewsets.ModelViewSet):
+class PostLinksViewSet(viewsets.ModelViewSet):
 
     # queryset = Posts.objects.all()
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
 
-    serializer_class = PostIdsSerializer
+    serializer_class = PostLinksSerializer
 
     queryset = Posts.objects.all().order_by('created_at')
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)

@@ -6,7 +6,7 @@ import Header from "./Header";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getPosts } from "../actions/posts";
+import { getPosts, clearPosts } from "../actions/posts";
 
 class BlogHome extends Component {
   static propTypes = {
@@ -24,10 +24,14 @@ class BlogHome extends Component {
     this.props.getPosts(3);
   }
 
+  componentWillUnmount() {
+    this.props.clearPosts();
+  }
+
   render() {
-    console.log(this.props.posts);
     // let blogEntries = [];
     let posts = [];
+
     posts = this.props.posts.map(post => (
       <BlogEntry key={post.id} frontpage={true} {...post} />
     ));
@@ -57,5 +61,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPosts }
+  { getPosts, clearPosts }
 )(BlogHome);

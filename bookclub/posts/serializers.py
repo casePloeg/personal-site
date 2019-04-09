@@ -10,7 +10,7 @@ class PostsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PostIdsSerializer(serializers.ModelSerializer):
+class PostLinksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = ['id', 'created_at']
+        fields = ['id', 'title', 'created_at']

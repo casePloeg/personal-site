@@ -14,8 +14,6 @@ class BlogEntryBase extends Component {
 
   componentDidMount() {
     if (this.props.id) {
-      console.log(this.props);
-
       let compiled = compile(this.props.body, {});
       let content = compiled.tree;
       let toc = compiled.tree;

@@ -1,9 +1,9 @@
 import {
   GET_POSTS,
   GET_POST,
-  GET_IDS,
   DELETE_POST,
-  ADD_POST
+  ADD_POST,
+  CLEAR_POSTS
 } from "../actions/types.js";
 
 const initialState = {
@@ -31,6 +31,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: [...state.posts, action.payload]
+      };
+    case CLEAR_POSTS:
+      return {
+        ...state,
+        posts: []
       };
 
     default:
