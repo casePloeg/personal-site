@@ -21,35 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-if socket.gethostname() == 'LAPTOP-OBOG1TBE':
-    DEBUG = TEMPLATE_DEBUG = True
-
-    with open('/bookclub/secret_key.txt') as f:
-        SECRET_KEY = f.read().strip()
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'bookclub',
-            'USER': 'root',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '',
-            'sql_mode': 'STRICT_TRANS_TABLES'
-        }
-    }
-
-else:
-    DEBUG = TEMPLATE_DEBUG = False
-    with open('/etc/secret_key.txt') as f:
-        SECRET_KEY = f.read().strip()
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'OPTIONS': {
-                'read_default_file': '/etc/mysql/my.cnf',
-            }
-        }
-    }
 
 ALLOWED_HOSTS = [
     'localhost', '127.0.0.1', 'caseploeg.com', 'www.caseploeg.com'
@@ -159,8 +130,53 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '25/day',
+        'user': '1000/day'
+    }
 }
 
 AUTHENTICATION_BACKENDS = (
     'ratelimitbackend.backends.RateLimitModelBackend',
 )
+
+
+if socket.gethostname() == 'LAPTOP-OBOG1TBE':
+    DEBUG = TEMPLATE_DEBUG = True
+
+    with open('/bookclub/secret_key.txt') as f:
+        SECRET_KEY = f.read().strip()
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'bookclub',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+            'sql_mode': 'STRICT_TRANS_TABLES',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
+    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['anon'] = '1000000/day'
+
+else:
+    DEBUG = TEMPLATE_DEBUG = False
+    with open('/etc/secret_key.txt') as f:
+        SECRET_KEY = f.read().strip()
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+                'read_default_file': '/etc/mysql/my.cnf',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            }
+        }
+    }

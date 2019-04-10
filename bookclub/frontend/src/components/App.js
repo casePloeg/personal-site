@@ -59,6 +59,7 @@ import AlertTemplate from "react-alert-template-basic";
 import { Provider } from "react-redux";
 import store from "../store";
 import "../App.css";
+import Alerts from "./layout/Alerts";
 import Home from "./Home";
 import Blog from "./Blog";
 import * as ROUTES from "../constants/routes";
@@ -78,6 +79,7 @@ function App() {
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <Router>
+          <Alerts />
           <div className="App">
             <div className="content">
               <Switch>

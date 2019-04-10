@@ -20,6 +20,7 @@ class Posts(models.Model):
 class Comments(models.Model):
     name = models.CharField(max_length=200)
     body = models.TextField()
+    email = models.EmailField(max_length=254, blank=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     post = models.ForeignKey('Posts', on_delete=models.CASCADE)
 

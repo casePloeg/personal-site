@@ -1,5 +1,5 @@
 from posts.models import Posts, Comments
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, mixins
 from .serializers import PostsSerializer, PostLinksSerializer, CommentsSerializer
 
 # Lead Viewset
@@ -39,13 +39,26 @@ class PostLinksViewSet(viewsets.ModelViewSet):
     queryset = Posts.objects.all().order_by('created_at')
 
 
-class CommentsViewSet(viewsets.ModelViewSet):
+class CommentsViewSet(mixins.CreateModelMixin,
+                      mixins.ListModelMixin,
+                      mixins.RetrieveModelMixin,
+                      viewsets.GenericViewSet):
 
     # queryset = Posts.objects.all()
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.AllowAny
     ]
 
     serializer_class = CommentsSerializer
 
-    queryset = Comments.objects.all().order_by('created_at')
+    def get_queryset(self):
+        """
+        Optionally restricts the of post returned by filtering for a number
+        """
+        # in reversed order
+        queryset = Comments.objects.all().order_by('created_at')
+        post = self.request.query_params.get('post', None)
+
+        if post is not None:
+            queryset = queryset.filter(post=post)
+        return queryset

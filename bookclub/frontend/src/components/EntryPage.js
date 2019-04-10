@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Header from "./Header";
 import BlogEntry from "./BlogEntry";
-import Comments from "./Comments";
+import Comments from "./comments/Comments";
 import NotFound from "./NotFound";
 import * as ROUTES from "../constants/routes";
 import "../App.css";
@@ -40,7 +40,8 @@ class EntryPage extends Component {
           <Header class={"align-right"} />
           <div className="blog-content">
             <BlogEntry frontpage={false} {...this.props.post} />
-            <Comments {...this.props} />
+
+            <Comments {...this.props.post} />
           </div>
         </div>
       );

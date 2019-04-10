@@ -34,7 +34,6 @@ const compile = marksy({
       return <ul>{children}</ul>;
     },
     p({ children }) {
-      //console.log(children);
       let regex = /(<cite>)(.*)(<\/cite>)/;
       let ret = null;
       if (children[0]) {

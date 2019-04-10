@@ -36,13 +36,6 @@ class BlogHome extends Component {
       <BlogEntry key={post.id} frontpage={true} {...post} />
     ));
 
-    // for (let key in this.state.entries) {
-    //   if (this.state.entries.hasOwnProperty(key)) {
-    //     blogEntries.push(<BlogEntry id={this.state.entries[key].id} />);
-    //   }
-    // }
-    // blogEntries = blogEntries.reverse();
-
     return (
       <div>
         <Header class={"align-right"} />

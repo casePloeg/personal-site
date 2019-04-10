@@ -4,7 +4,8 @@ import {
   DELETE_POST,
   ADD_POST,
   GET_ERRORS,
-  CLEAR_POSTS
+  CLEAR_POSTS,
+  GET_COMMENTS
 } from "./types";
 
 // CLEAR ALL POSTS
