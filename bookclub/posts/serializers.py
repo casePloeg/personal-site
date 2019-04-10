@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from posts.models import Posts
+from posts.models import Posts, Comments
 
 # Posts Serializer
 
@@ -14,3 +14,9 @@ class PostLinksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
         fields = ['id', 'title', 'created_at']
+
+
+class CommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['name', 'body', 'created_at']

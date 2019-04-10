@@ -1,6 +1,6 @@
-from posts.models import Posts
+from posts.models import Posts, Comments
 from rest_framework import viewsets, permissions
-from .serializers import PostsSerializer, PostLinksSerializer
+from .serializers import PostsSerializer, PostLinksSerializer, CommentsSerializer
 
 # Lead Viewset
 
@@ -37,3 +37,15 @@ class PostLinksViewSet(viewsets.ModelViewSet):
     serializer_class = PostLinksSerializer
 
     queryset = Posts.objects.all().order_by('created_at')
+
+
+class CommentsViewSet(viewsets.ModelViewSet):
+
+    # queryset = Posts.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
+
+    serializer_class = CommentsSerializer
+
+    queryset = Comments.objects.all().order_by('created_at')
