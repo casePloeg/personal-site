@@ -133,12 +133,17 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 
     'DEFAULT_THROTTLE_CLASSES': (
+
         'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+        'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '25/day',
-        'user': '1000/day'
+        'postcomment': '10/day',
+        'getcomments': '1000/day',
+        'clubmail': '10/day',
+        'anon': '1000/day',
+        'user': '1000/day',
     }
 }
 
@@ -167,14 +172,14 @@ if socket.gethostname() == 'LAPTOP-OBOG1TBE':
             },
         }
     }
-    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['anon'] = '1000000/day'
+    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['postcomment'] = '0/day'
 
     with open('/bookclub/mail_secrets.txt') as f:
         MAILGUN_ACCESS_KEY = f.readline().strip()
         MAILGUN_SERVER_NAME = f.readline().strip()
         f.close()
 
-
+    MAILGUN_BOOKCLUB_LIST = "test_bookclub@mail.caseploeg.com"
 else:
     DEBUG = TEMPLATE_DEBUG = False
     with open('/etc/secret_key.txt') as f:
@@ -195,3 +200,5 @@ else:
         MAILGUN_ACCESS_KEY = f.readline().strip()
         MAILGUN_SERVER_NAME = f.readline().strip()
         f.close()
+
+    MAILGUN_BOOKCLUB_LIST = "bookclub@mail.caseploeg.com"

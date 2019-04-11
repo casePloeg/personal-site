@@ -54,7 +54,7 @@ export const addComment = comment => (dispatch, getState) => {
   let statusText;
   // turn the fetch call into a promise so that it's possible to know whether is was successful or not
   return new Promise(function(resolve, reject) {
-    fetch("/api/comments/", config)
+    fetch("/api/postcomment/", config)
       .then(res => {
         ok = res.ok;
         statusText = res.statusText;

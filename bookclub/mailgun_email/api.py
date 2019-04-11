@@ -1,14 +1,13 @@
 from mailgun_email.models import BookclubMailingList
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import permissions, mixins, viewsets
 from .serializers import BookclubMailingListSerializer
 
 # only allow creation
 
-
-class BookclubMailingListViewSet(mixins.CreateModelMixin,   viewsets.GenericViewSet):
-
+# specify throttle limit specifically for creation
+class BookclubMailingListViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     permission_classes = [
         permissions.AllowAny
     ]
-
+    throttle_scope = 'clubmail'
     serializer_class = BookclubMailingListSerializer

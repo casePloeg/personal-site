@@ -1,5 +1,5 @@
 from posts.models import Posts, Comments
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, permissions, mixins, generics
 from .serializers import PostsSerializer, PostLinksSerializer, CommentsSerializer
 
 # Lead Viewset
@@ -39,13 +39,22 @@ class PostLinksViewSet(viewsets.ModelViewSet):
     queryset = Posts.objects.all().order_by('created_at')
 
 
-# doesn't allow deletes
-class CommentsViewSet(mixins.CreateModelMixin,
-                      mixins.ListModelMixin,
-                      mixins.RetrieveModelMixin,
-                      viewsets.GenericViewSet):
+# specify throttle limit specifically for creation
+class CreateCommentViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    throttle_scope = 'postcomment'
+    serializer_class = CommentsSerializer
 
-    # queryset = Posts.objects.all()
+
+# doesn't allow deletes
+class CommentsViewSet(
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet):
+    throttle_scope = 'getcomments'
+    
     permission_classes = [
         permissions.AllowAny
     ]
@@ -63,3 +72,5 @@ class CommentsViewSet(mixins.CreateModelMixin,
         if post is not None:
             queryset = queryset.filter(post=post)
         return queryset
+
+

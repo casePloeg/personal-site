@@ -13,7 +13,7 @@ class BookclubMailingList(models.Model):
 
     def add_list_member(self, email):
         return requests.post(
-            "https://api.mailgun.net/v3/lists/bookclub@mail.caseploeg.com/members",
+            "https://api.mailgun.net/v3/lists/"+ settings.MAILGUN_BOOKCLUB_LIST+ "/members",
             auth=('api', settings.MAILGUN_ACCESS_KEY),
             data={'subscribed': True,
                   'address': email,

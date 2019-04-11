@@ -23,7 +23,7 @@ class Posts(models.Model):
             "https://api.mailgun.net/v3/mail.caseploeg.com/messages",
             auth=("api", settings.MAILGUN_ACCESS_KEY),
             data={"from": "Case Ploeg <bookclub@" + "mail.caseploeg.com" + ">",
-                  "to": ["bookclub@mail.caseploeg.com"],
+                  "to": [settings.MAILGUN_BOOKCLUB_LIST],
                   "subject": "New Post",
                   "text": "Hey! I just uploaded a new post called " + title + "  at https://caseploeg.com/blog. Check it out and let me know what you think.\n\nYours,\nCase"})
 
