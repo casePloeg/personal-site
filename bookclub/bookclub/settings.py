@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'posts',
     'accounts',
     'frontend',
+    'mailgun_email',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -145,12 +146,13 @@ AUTHENTICATION_BACKENDS = (
     'ratelimitbackend.backends.RateLimitModelBackend',
 )
 
-
 if socket.gethostname() == 'LAPTOP-OBOG1TBE':
     DEBUG = TEMPLATE_DEBUG = True
 
     with open('/bookclub/secret_key.txt') as f:
         SECRET_KEY = f.read().strip()
+        f.close()
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -167,10 +169,18 @@ if socket.gethostname() == 'LAPTOP-OBOG1TBE':
     }
     REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['anon'] = '1000000/day'
 
+    with open('/bookclub/mail_secrets.txt') as f:
+        MAILGUN_ACCESS_KEY = f.readline().strip()
+        MAILGUN_SERVER_NAME = f.readline().strip()
+        f.close()
+
+
 else:
     DEBUG = TEMPLATE_DEBUG = False
     with open('/etc/secret_key.txt') as f:
         SECRET_KEY = f.read().strip()
+        f.close()
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -180,3 +190,8 @@ else:
             }
         }
     }
+
+    with open('/etc/mail_secrets.txt') as f:
+        MAILGUN_ACCESS_KEY = f.readline().strip()
+        MAILGUN_SERVER_NAME = f.readline().strip()
+        f.close()

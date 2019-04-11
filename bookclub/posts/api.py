@@ -39,6 +39,7 @@ class PostLinksViewSet(viewsets.ModelViewSet):
     queryset = Posts.objects.all().order_by('created_at')
 
 
+# doesn't allow deletes
 class CommentsViewSet(mixins.CreateModelMixin,
                       mixins.ListModelMixin,
                       mixins.RetrieveModelMixin,

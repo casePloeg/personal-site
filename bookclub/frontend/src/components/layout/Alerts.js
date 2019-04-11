@@ -18,7 +18,11 @@ export class Alerts extends Component {
         alert.error(`Body: ${error.msg.body.join()}`);
       }
       if (error.msg.email) {
-        alert.error(`${error.msg.email.join()}`);
+        if (error.msg.email[0].startsWith("bookclub")) {
+          alert.error("Email already subscribed");
+        } else {
+          alert.error(`${error.msg.email.join()}`);
+        }
       }
     }
   }

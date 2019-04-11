@@ -22,7 +22,6 @@ export class Form extends Component {
     const post = { title, body };
     // if addPost goes through, reset the form fields
     let promise = this.props.addPost(post);
-    console.log(promise);
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });

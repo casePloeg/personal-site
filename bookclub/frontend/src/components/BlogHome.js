@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import BlogEntry from "./BlogEntry";
 import Header from "./Header";
+import SubscribeForm from "./subscriptions/SubscribeForm";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -41,6 +42,7 @@ class BlogHome extends Component {
         <Header class={"align-right"} />
         <div className="blog-content">
           {posts}
+          <SubscribeForm />
           <Link to={ROUTES.ARCHIVE}>Older posts</Link>
         </div>
       </div>

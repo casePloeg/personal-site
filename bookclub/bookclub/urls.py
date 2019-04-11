@@ -28,6 +28,7 @@ from rest_framework import routers
 urlpatterns = [
     path('', include('frontend.urls')),
     path('', include('posts.urls')),
+    path('', include('mailgun_email.urls')),
     path('', include('accounts.urls')),
     path('admin', admin.site.urls),
 ]

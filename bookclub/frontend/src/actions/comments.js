@@ -73,7 +73,7 @@ export const addComment = comment => (dispatch, getState) => {
       })
       .catch(data => {
         dispatch(returnErrors(data, statusText));
-        console.log(data);
+
         reject();
       });
   });
