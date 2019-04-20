@@ -34,13 +34,18 @@ const compile = marksy({
       return <ul>{children}</ul>;
     },
     p({ children }) {
+      // convert cite tags
       let regex = /(<cite>)(.*)(<\/cite>)/;
       let ret = null;
+     
       if (children[0]) {
-        let ret = children[0].match(regex);
+        
+        ret = children[0].match(regex);
+       
       }
 
-      if (ret) {
+      if (ret != null) {
+       
         return <cite className="align-right">{ret[2]}</cite>;
       } else {
         return <p>{children}</p>;

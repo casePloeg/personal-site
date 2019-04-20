@@ -1,5 +1,4 @@
 import { returnErrors } from "./messages";
-
 export const subscribeToBlog = email => (dispatch, getState) => {
   // Headers
   const config = {
