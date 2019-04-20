@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import * as ROUTES from "../constants/routes";
+import * as ROUTES from "../../constants/routes";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getPostLinks, clearPosts } from "../actions/posts";
+import { getPostLinks, clearPosts } from "../../actions/posts";
 
-import Header from "./Header";
+import Header from "../Header";
 
 class Archive extends Component {
   static propTypes = {

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import * as ROUTES from "../constants/routes";
+import * as ROUTES from "../../constants/routes";
 import BlogEntry from "./BlogEntry";
-import Header from "./Header";
-import SubscribeForm from "./subscriptions/SubscribeForm";
+import Header from "../Header";
+import SubscribeForm from "../subscriptions/SubscribeForm";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getPosts, clearPosts } from "../actions/posts";
+import { getPosts, clearPosts } from "../../actions/posts";
 
 class BlogHome extends Component {
   static propTypes = {

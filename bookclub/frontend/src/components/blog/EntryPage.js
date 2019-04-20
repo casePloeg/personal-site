@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Header from "./Header";
+import Header from "../Header";
 import BlogEntry from "./BlogEntry";
-import Comments from "./comments/Comments";
-import NotFound from "./NotFound";
-import * as ROUTES from "../constants/routes";
+import Comments from "../comments/Comments";
+import NotFound from "../NotFound";
+import * as ROUTES from "../../constants/routes";
 import "../App.css";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getPost } from "../actions/posts";
+import { getPost } from "../../actions/posts";
 
 class EntryPage extends Component {
   constructor(props) {
