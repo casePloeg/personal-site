@@ -129,8 +129,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 10,
 
     'DEFAULT_THROTTLE_CLASSES': (
 
@@ -172,7 +172,7 @@ if socket.gethostname() == 'LAPTOP-OBOG1TBE':
             },
         }
     }
-    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['postcomment'] = '0/day'
+    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['postcomment'] = '5/day'
 
     with open('/bookclub/mail_secrets.txt') as f:
         MAILGUN_ACCESS_KEY = f.readline().strip()

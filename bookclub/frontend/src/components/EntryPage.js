@@ -19,6 +19,7 @@ class EntryPage extends Component {
   }
 
   componentDidMount() {
+    console.log("hello!")
     this.props
       .getPost(this.props.match.params.id)
       .then(res => {

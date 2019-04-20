@@ -23,7 +23,7 @@ export const getComments = id => (dispatch, getState) => {
       if (ok) {
         dispatch({
           type: GET_COMMENTS,
-          payload: response.results
+          payload: response
         });
       } else {
         throw response;

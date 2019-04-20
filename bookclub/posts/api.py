@@ -66,7 +66,7 @@ class CommentsViewSet(
         Optionally restricts the of post returned by filtering for a number
         """
         # in reversed order
-        queryset = Comments.objects.all().order_by('created_at')
+        queryset = Comments.objects.all().order_by('created_at').filter(approved=True)
         post = self.request.query_params.get('post', None)
 
         if post is not None:

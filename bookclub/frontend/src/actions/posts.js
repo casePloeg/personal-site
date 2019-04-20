@@ -45,7 +45,7 @@ export const getPosts = numPosts => (dispatch, getState) => {
       if (ok) {
         dispatch({
           type: GET_POSTS,
-          payload: response.results
+          payload: response
         });
       } else {
         throw response;
@@ -114,7 +114,7 @@ export const getPostLinks = () => (dispatch, getState) => {
       if (ok) {
         dispatch({
           type: GET_POSTS,
-          payload: response.results.map(result => ({ ...result, body: "" }))
+          payload: response.map(result => ({ ...result, body: "" }))
         });
       } else {
         throw response;

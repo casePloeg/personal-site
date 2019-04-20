@@ -1,11 +1,11 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+
 from django.conf import settings
 import requests
 
-# Create your models here.
-
+import mailgun_email.mailgun as mail
 
 class Posts(models.Model):
     title = models.CharField(max_length=200)
@@ -18,20 +18,19 @@ class Posts(models.Model):
     class Meta:
         verbose_name_plural = "Posts"
 
-    def send_simple_message(self, title):
-        return requests.post(
-            "https://api.mailgun.net/v3/mail.caseploeg.com/messages",
-            auth=("api", settings.MAILGUN_ACCESS_KEY),
-            data={"from": "Case Ploeg <bookclub@" + "mail.caseploeg.com" + ">",
-                  "to": [settings.MAILGUN_BOOKCLUB_LIST],
-                  "subject": "New Post",
-                  "text": "Hey! I just uploaded a new post called " + title + "  at https://caseploeg.com/blog. Check it out and let me know what you think.\n\nYours,\nCase"})
-
     def save(self, *args, **kwargs):
         # send out email to bookclub mailing list on new post
+        # create maillist for the new post's comments
         if self.pk is None:
-            print(self.send_simple_message(self.title))
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+            # create mailing list for this specific post
+            mail.create_mailing_list(id=self.pk)
+            # add author to the post's mailing list
+            mail.add_list_member(id=self.pk, address="case.ploeg@gmail.com")
+            # send message to mailing list 
+            mail.send_simple_message(subject="New Post", text="Hey! I just uploaded a new post called " + self.title + " at https://caseploeg.com/blog. Check it out and let me know what you think.\n\nYours,\nCase", list=settings.MAILGUN_BOOKCLUB_LIST)
+        else:
+            super().save(*args, **kwargs)
 
 
 class Comments(models.Model):
@@ -40,9 +39,20 @@ class Comments(models.Model):
     email = models.EmailField(max_length=254, blank=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     post = models.ForeignKey('Posts', on_delete=models.CASCADE)
+    approved = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name + " - " + self.body[:20] + " ..."
 
     class Meta:
         verbose_name_plural = "Comments"
+
+    def save(self, *args, **kwargs):
+        # send email to post subscribers when there is a new comment
+        if self.pk is None:
+            super().save(*args, **kwargs)
+            mail.send_simple_message(subject="New Comment on " + str(self.post),
+            text=self.name + " says " + self.body + "\n See more at https://caseploeg.com/blog/" + str(self.post.id),
+            list=str(self.post.id)+ "@mail.caseploeg.com")
+        else:
+            super().save(*args, **kwargs)
