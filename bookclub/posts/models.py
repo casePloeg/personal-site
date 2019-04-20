@@ -18,6 +18,11 @@ class Posts(models.Model):
     class Meta:
         verbose_name_plural = "Posts"
 
+    def delete(self):
+        # remove this post's mailing list upon deletion
+        mail.remove_list(self.pk)
+        super().delete()
+
     def save(self, *args, **kwargs):
         # send out email to bookclub mailing list on new post
         # create maillist for the new post's comments

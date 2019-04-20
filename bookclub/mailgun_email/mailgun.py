@@ -25,3 +25,8 @@ def add_list_member(id, address):
         data={'subscribed': True,
                 'address': address,
                 })
+
+def remove_list(id):
+    return requests.delete(
+        "https://api.mailgun.net/v3/lists/"+str(id)+"@mail.caseploeg.com",
+        auth=('api', settings.MAILGUN_ACCESS_KEY))
