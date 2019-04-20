@@ -1,5 +1,5 @@
-import { GET_COMMENTS, ADD_COMMENT } from "./types";
-import { returnErrors } from "./posts";
+import { GET_COMMENTS, ADD_COMMENT, CREATE_MESSAGE } from "./types";
+import { returnErrors, createMessage } from "./messages";
 
 // GET COMMENTS
 export const getComments = id => (dispatch, getState) => {
@@ -61,11 +61,19 @@ export const addComment = comment => (dispatch, getState) => {
         return res.json();
       })
       .then(response => {
+        console.log(response);
         if (ok) {
-          dispatch({
-            type: ADD_COMMENT,
-            payload: response
-          });
+          // if the user didn't give an email then add to the displayed comments
+          console.log(comment.email)
+          if(comment.email == ""){
+            dispatch({
+              type: ADD_COMMENT,
+              payload: response
+            });
+          } else {
+            dispatch(createMessage({ commentSent: "Comment Sent!" }))
+          }
+          
           resolve();
         } else {
           throw response;

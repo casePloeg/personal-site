@@ -172,7 +172,7 @@ if socket.gethostname() == 'LAPTOP-OBOG1TBE':
             },
         }
     }
-    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['postcomment'] = '5/day'
+    REST_FRAMEWORK['DEFAULT_THROTTLE_RATES']['postcomment'] = '1000/day'
 
     with open('/bookclub/mail_secrets.txt') as f:
         MAILGUN_ACCESS_KEY = f.readline().strip()

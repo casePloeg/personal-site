@@ -51,8 +51,16 @@ class Comments(models.Model):
         # send email to post subscribers when there is a new comment
         if self.pk is None:
             super().save(*args, **kwargs)
-            mail.send_simple_message(subject="New Comment on " + str(self.post),
-            text=self.name + " says " + self.body + "\n See more at https://caseploeg.com/blog/" + str(self.post.id),
-            list=str(self.post.id)+ "@mail.caseploeg.com")
+            # if the user didn't provide an email address, notify everyone (public)
+            if(self.email == ""):
+
+                mail.send_simple_message(subject="New Comment on " + str(self.post),
+                text=self.name + " says:\n" + self.body + "\n See more at https://caseploeg.com/blog/" + str(self.post.id),
+                list=str(self.post.id)+ "@mail.caseploeg.com")
+            else:
+                # send the message directly to me
+                mail.send_simple_message(subject="New Direct Message on " + str(self.post),
+                text=self.name + " @ " + self.email + " says:\n" + self.body,
+                list="case.ploeg@gmail.com")
         else:
             super().save(*args, **kwargs)

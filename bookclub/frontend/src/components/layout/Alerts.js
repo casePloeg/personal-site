@@ -9,7 +9,7 @@ export class Alerts extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, alert } = this.props;
+    const { error, alert, message } = this.props;
     
     if (error !== prevProps.error) {
       if (error.msg.title) {
@@ -29,6 +29,11 @@ export class Alerts extends Component {
         alert.error("Timed out due to repeated requests");
       }
     }
+
+    if (message !== prevProps.message){
+      console.log(message);
+      if (message.commentSent) alert.success(message.commentSent);
+    }
   }
   render() {
     return <Fragment />;
@@ -36,7 +41,8 @@ export class Alerts extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.errors
+  error: state.errors,
+  message: state.messages
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));

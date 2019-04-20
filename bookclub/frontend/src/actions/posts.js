@@ -8,19 +8,13 @@ import {
   GET_COMMENTS
 } from "./types";
 
+import { returnErrors } from "./messages";
+
 // CLEAR ALL POSTS
 export const clearPosts = () => (dispatch, getState) => {
   dispatch({
     type: CLEAR_POSTS
   });
-};
-
-// RETURN ERRORS
-export const returnErrors = (msg, status) => {
-  return {
-    type: GET_ERRORS,
-    payload: { msg, status }
-  };
 };
 
 // GET POSTS

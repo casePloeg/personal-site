@@ -56,7 +56,7 @@ class CommentForm extends Component {
               type="text"
               placeholder=""
             />
-            <label> - only used for direct replies</label>
+            <label> - only used for direct replies (your comment is sent directly to me)</label>
           </span>
 
           <textarea
