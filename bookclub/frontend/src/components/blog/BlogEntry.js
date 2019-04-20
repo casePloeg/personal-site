@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import compile from "../../constants/compile";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-import "../App.css";
+import "../../App.css";
 
 import moment from "moment";
 class BlogEntryBase extends Component {

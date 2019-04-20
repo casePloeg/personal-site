@@ -5,10 +5,10 @@ import BlogEntry from "./BlogEntry";
 import Comments from "../comments/Comments";
 import NotFound from "../NotFound";
 import * as ROUTES from "../../constants/routes";
-import "../App.css";
+import "../../App.css";
 
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+
 import { getPost } from "../../actions/posts";
 
 class EntryPage extends Component {

@@ -4,7 +4,7 @@ import BlogHome from "./BlogHome";
 import EntryPage from "./EntryPage";
 import Archive from "./Archive";
 import * as ROUTES from "../../constants/routes";
-import "../App.css";
+import "../../App.css";
 class Blog extends Component {
   render() {
     return (
