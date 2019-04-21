@@ -1,6 +1,9 @@
 export const GET_POSTS = "GET_POSTS";
+export const GET_POST = "GET_POST";
+export const CLEAR_POSTS = "CLEAR_POSTS";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
+export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
@@ -8,3 +11,5 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const GET_COMMENTS = "GET_COMMENTS";
+export const ADD_COMMENT = "ADD_COMMENT";

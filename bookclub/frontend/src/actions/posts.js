@@ -1,20 +1,24 @@
-import axios from "axios";
+import {
+  GET_POSTS,
+  GET_POST,
+  DELETE_POST,
+  ADD_POST,
+  GET_ERRORS,
+  CLEAR_POSTS,
+  GET_COMMENTS
+} from "./types";
 
-import { GET_POSTS, DELETE_POST, ADD_POST, GET_ERRORS } from "./types";
+import { returnErrors } from "./messages";
 
-// RETURN ERRORS
-export const returnErrors = (msg, status) => {
-  return {
-    type: GET_ERRORS,
-    payload: { msg, status }
-  };
+// CLEAR ALL POSTS
+export const clearPosts = () => (dispatch, getState) => {
+  dispatch({
+    type: CLEAR_POSTS
+  });
 };
 
 // GET POSTS
-export const getPosts = () => (dispatch, getState) => {
-  // Get token from state
-  const token = getState().auth.token;
-
+export const getPosts = numPosts => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
@@ -23,14 +27,9 @@ export const getPosts = () => (dispatch, getState) => {
     method: "GET"
   };
 
-  // If token add to headers config
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
-
   let ok;
   let statusText;
-  fetch("/api/posts/", config)
+  fetch(`/api/posts/?num=${numPosts}`, config)
     .then(res => {
       ok = res.ok;
       statusText = res.statusText;
@@ -40,7 +39,76 @@ export const getPosts = () => (dispatch, getState) => {
       if (ok) {
         dispatch({
           type: GET_POSTS,
-          payload: response.results
+          payload: response
+        });
+      } else {
+        throw response;
+      }
+    })
+    .catch(data => dispatch(returnErrors(data, statusText)));
+};
+
+// GET INDIVIDUAL POST
+export const getPost = id => (dispatch, getState) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  };
+
+  let ok;
+  let statusText;
+  let promise = new Promise(function(resolve, reject) {
+    fetch(`/api/posts/${id}`, config)
+      .then(res => {
+        ok = res.ok;
+        statusText = res.statusText;
+        return res.json();
+      })
+      .then(response => {
+        if (ok) {
+          dispatch({
+            type: GET_POST,
+            payload: response
+          });
+          resolve();
+        } else {
+          throw response;
+        }
+      })
+      .catch(data => {
+        dispatch(returnErrors(data, statusText));
+        reject();
+      });
+  });
+  return promise;
+};
+
+// GET POSTS WITHOUT BODY
+export const getPostLinks = () => (dispatch, getState) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  };
+
+  let ok;
+  let statusText;
+  fetch(`/api/postlinks`, config)
+    .then(res => {
+      ok = res.ok;
+      statusText = res.statusText;
+      return res.json();
+    })
+    .then(response => {
+      if (ok) {
+        dispatch({
+          type: GET_POSTS,
+          payload: response.map(result => ({ ...result, body: "" }))
         });
       } else {
         throw response;
