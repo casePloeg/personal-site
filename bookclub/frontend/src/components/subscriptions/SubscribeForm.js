@@ -30,7 +30,7 @@ export class SubscribeForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <span className="form_span">
-          <label>Email me about new posts: </label>
+          <label>Sign up for emails about new posts: </label>
           <input
             name="email"
             value={email}

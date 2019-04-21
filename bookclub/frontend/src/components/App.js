@@ -88,8 +88,6 @@ function App() {
                 <Route path={ROUTES.HOME} component={NotFound} />
               </Switch>
             </div>
-
-            <Footer />
           </div>
         </Router>
       </AlertProvider>

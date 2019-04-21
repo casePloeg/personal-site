@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
+import SocialIcons from "./common/SocialIcons";
 
 class Home extends Component {
   constructor(props) {
@@ -30,11 +31,28 @@ class Home extends Component {
     return (
       <div className="home-wrapper">
         <div className="home">
-          <h1>
-            <Link to={ROUTES.HOME}>Case Ploeg</Link>
-          </h1>
-          <br />
-          <Link to={ROUTES.BLOG}>Book Club</Link>
+          <div className="full-width title-card">
+            <div className="name effect3">
+              <h1>
+                <Link to={ROUTES.HOME}>Case Ploeg</Link>
+              </h1>
+            </div>
+          </div>
+
+          <div className="home-content">
+            <p>
+              Hi! I'm <Link to={ROUTES.HOME}>Case Ploeg</Link>, on occasion I:
+              read books and write about them, make websites, and study Computer
+              Science at the University of Toronto.
+            </p>
+            <p>
+              Join my <Link to={ROUTES.BLOG}>bookclub</Link>!
+            </p>
+            <p>case.ploeg[at]gmail.com</p>
+          </div>
+        </div>
+        <div className="full-width socials">
+          <SocialIcons />
         </div>
       </div>
     );
