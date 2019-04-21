@@ -34,18 +34,13 @@ p {
   display: show;
 }
 
-.comment_form {
-  display: grid;
-  flex-direction: column;
-}
-
 .align-right {
   text-align: right;
 }
 
 .epigraph {
   padding-left: 10%;
-  color: #666;
+  color: var(--c5);
   display: flex;
   flex-direction: column;
 }
@@ -73,11 +68,121 @@ a:active {
 
 .blog {
   margin: auto;
-  max-width: 50vw;
+  width: 50vw;
 }
 
 .blog-wrapper {
   display: flex;
+}
+
+.blog-content {
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+}
+
+.blog-posts {
+  margin-bottom: 5vh;
+}
+
+.blog-subscribe {
+  background: var(--c1);
+  padding: 1em;
+  box-shadow: 0px 10px 2px -5px var(--c3);
+}
+
+.blog-links {
+  text-align: center;
+  padding: 1em;
+}
+
+.blog-subscribe form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+}
+.blog-subscribe button {
+  padding: 0.5rem;
+  border: none;
+
+  border-radius: 1em;
+  margin-left: 0.5em;
+  color: var(--c5);
+  background: #ddd;
+  font-weight: bold;
+}
+.blog-subscribe button:disabled {
+  color: var(--c4);
+}
+.blog-subscribe label {
+  margin-bottom: 0.5em;
+}
+
+.blog-subscribe input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1em;
+
+  margin-right: -2em;
+}
+
+.bentry {
+  background: var(--c1);
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-bottom: 1em;
+  box-shadow: 0px 10px 2px -5px var(--c3);
+}
+
+.bentry-title {
+  margin: 0;
+  background: var(--c3);
+  padding: 1em;
+  margin-left: -10vw;
+  margin-right: 10vw;
+}
+
+.bentry-date {
+  margin: 0;
+  background: var(--c4);
+  padding: 1em;
+  margin-left: 10vw;
+  margin-right: -10vw;
+}
+.header {
+  text-align: right;
+  height: 10vh;
+  margin: 0;
+  background: var(--c4);
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.header-content {
+  flex-shrink: 1;
+  background: #eae7dc;
+  margin-bottom: -5vh;
+  margin-top: 5vh;
+
+  padding-left: 30vw;
+  padding-right: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header h1,
+.header h2,
+.header h3,
+.header h4,
+.header h5 {
+  margin: 0;
 }
 
 .home-wrapper {
@@ -212,23 +317,96 @@ a:active {
   font-size: 2em;
 }
 
-/* Small Screens */
-@media screen and (max-width: 500px) {
-  .home-content {
-    width: 80vw;
-    padding: 1em;
-    margin-right: 0;
-  }
+.comments {
+  margin-top: 5vh;
+}
+.comments .showButton {
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em;
+  background: var(--c1);
+  color: var(--c5);
+}
+button:focus {
+  outline: 0;
 }
 
-/* Medium Screens */
-@media screen and (max-width: 768px) {
+input:focus {
+  outline: 0;
 }
 
-/* Large Screens */
-@media screen and (min-width: 769px) and (max-width: 1170px) {
+textarea:focus {
+  outline: 0;
+}
+.comments .showButton:hover {
+  box-shadow: 0px 5px 1px -2px var(--c3);
+  font-weight: bolder;
 }
 
+.comments form {
+  margin-top: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments form label {
+  padding: 0.5em;
+  padding-right: 2em;
+  border: none;
+  border-radius: 1em;
+  background: var(--c1);
+}
+
+.comments form input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1em;
+  flex: 1;
+  margin-left: -2em;
+}
+
+.comments form textarea {
+  height: 10vh;
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+.comments form button {
+  align-self: flex-end;
+  width: 20%;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em;
+  font-weight: bolder;
+  background: var(--c1);
+  color: var(--c5);
+}
+
+.comments form button:hover {
+  box-shadow: 0px 5px 1px -2px var(--c3);
+}
+
+.comments form button:disabled {
+  font-weight: 400;
+  box-shadow: none;
+  color: var(--c4);
+}
+
+.comment-form .form-span {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1em;
+}
+
+.archive-content {
+  margin-top: 10vh;
+  padding-left: 2em;
+  padding-right: 2em;
+}
 /* XLarge Screens */
 @media screen and (min-width: 1171px) {
 }
@@ -240,4 +418,38 @@ a:active {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+/* Large Screens */
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  .blog {
+    width: 70vw;
+  }
+}
+
+/* Medium Screens */
+@media screen and (max-width: 768px) {
+  .blog {
+    width: 80vw;
+  }
+  .blog-content {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .bentry-title {
+    font-size: 120%;
+  }
+}
+
+/* Small Screens */
+@media screen and (max-width: 500px) {
+  .blog {
+    width: 100vw;
+  }
+
+  .home-content {
+    width: 80vw;
+    padding: 1em;
+    margin-right: 0;
+  }
 }

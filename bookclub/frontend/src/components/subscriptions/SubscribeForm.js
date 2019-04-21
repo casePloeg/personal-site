@@ -29,19 +29,19 @@ export class SubscribeForm extends Component {
     const { email } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
+        <label>Sign up for emails about new posts: </label>
         <span className="form_span">
-          <label>Sign up for emails about new posts: </label>
           <input
             name="email"
             value={email}
             onChange={this.onChange}
             type="text"
-            placeholder=""
+            placeholder="name@example.com"
           />
+          <button disabled={email === ""} type="submit">
+            Go
+          </button>
         </span>
-        <button disabled={email === ""} type="submit">
-          Go
-        </button>
       </form>
     );
   }

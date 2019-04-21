@@ -36,8 +36,8 @@ class CommentForm extends Component {
 
     return (
       <div>
-        <form className={"comment_form"} onSubmit={this.onSubmitComment}>
-          <span className="form_span">
+        <form className={"comment-form"} onSubmit={this.onSubmitComment}>
+          <span className="form-span">
             <label>Name</label>
             <input
               name="name"
@@ -47,17 +47,16 @@ class CommentForm extends Component {
               placeholder=""
             />
           </span>
-          <span className="form_span">
+          {/* <span className="form-span">
             <label>Email </label>
             <input
               name="email"
               value={email}
               onChange={this.onChange}
               type="text"
-              placeholder=""
+              placeholder="name@example.com"
             />
-            <label> - only used for direct replies (your comment is sent directly to me)</label>
-          </span>
+          </span> */}
 
           <textarea
             name="body"
@@ -65,12 +64,10 @@ class CommentForm extends Component {
             onChange={this.onChange}
             type="textarea"
           />
-          <span className="form_span">
-            <button disabled={isInvalid} type="submit">
-              Publish
-            </button>
-            <label>Comments may be edited based on content</label>
-          </span>
+
+          <button disabled={isInvalid} type="submit">
+            Publish
+          </button>
         </form>
       </div>
     );

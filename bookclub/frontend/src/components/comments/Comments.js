@@ -22,8 +22,10 @@ export class Comments extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.onClick}>Show comments</button>
+      <div className="comments">
+        <button className="showButton" onClick={this.onClick}>
+          Show comments
+        </button>
         <div className={this.state.hide}>
           <CommentList id={this.props.id} />
           <CommentForm id={this.props.id} />

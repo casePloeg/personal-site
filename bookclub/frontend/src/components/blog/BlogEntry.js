@@ -36,7 +36,7 @@ class BlogEntryBase extends Component {
   render() {
     return (
       <div className="bentry">
-        <h2 className="bentry_title">
+        <h2 className="bentry-title">
           {this.state.frontpage ? (
             <Link to={`${ROUTES.BLOG}${this.state.id}`}>
               {this.state.title}
@@ -47,7 +47,8 @@ class BlogEntryBase extends Component {
         </h2>
 
         <div className="bentry_content">{this.state.content}</div>
-        <p className="align-right">
+
+        <h4 className="align-right bentry-date">
           {" "}
           {this.state.frontpage ? (
             <Link to={`${ROUTES.BLOG}${this.state.id}`}>
@@ -56,7 +57,7 @@ class BlogEntryBase extends Component {
           ) : (
             this.state.created
           )}
-        </p>
+        </h4>
         <div />
       </div>
     );

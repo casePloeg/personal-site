@@ -5,13 +5,15 @@ import * as ROUTES from "../constants/routes";
 class Header extends Component {
   render() {
     return (
-      <div className={this.props.class}>
-        <h1>
-          <Link to={ROUTES.BLOG}>Book Club</Link>
-        </h1>
-        <h5>
-          by <Link to={ROUTES.HOME}>Case Ploeg</Link>
-        </h5>
+      <div className={`header full-width `}>
+        <div className="header-content effect3">
+          <h2>
+            <Link to={ROUTES.BLOG}>Book Club</Link>
+          </h2>
+          <h5>
+            by <Link to={ROUTES.HOME}>Case Ploeg</Link>
+          </h5>
+        </div>
       </div>
     );
   }

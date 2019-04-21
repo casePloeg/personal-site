@@ -42,8 +42,10 @@ class Archive extends Component {
     return (
       <div>
         <Header class={"align-right"} />
-        <h2>The Archives</h2>
-        <ul>{listItems}</ul>
+        <div className="archive-content">
+          <h2>The Archives</h2>
+          <ul>{listItems}</ul>
+        </div>
       </div>
     );
   }

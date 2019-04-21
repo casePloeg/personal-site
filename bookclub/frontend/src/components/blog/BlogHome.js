@@ -4,7 +4,7 @@ import * as ROUTES from "../../constants/routes";
 import BlogEntry from "./BlogEntry";
 import Header from "../Header";
 import SubscribeForm from "../subscriptions/SubscribeForm";
-
+import SocialIcons from "../common/SocialIcons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getPosts, clearPosts } from "../../actions/posts";
@@ -39,11 +39,20 @@ class BlogHome extends Component {
 
     return (
       <div>
-        <Header class={"align-right"} />
+        <Header />
         <div className="blog-content">
-          {posts}
-          <SubscribeForm />
-          <Link to={ROUTES.ARCHIVE}>Older posts</Link>
+          <div className="blog-posts">{posts}</div>
+
+          <div className="blog-subscribe">
+            <SubscribeForm />
+          </div>
+
+          <div class="blog-links">
+            <Link to={ROUTES.ARCHIVE}>Older posts</Link>
+          </div>
+        </div>
+        <div className="full-width socials">
+          <SocialIcons />
         </div>
       </div>
     );
