@@ -1,4 +1,4 @@
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 export const subscribeToBlog = email => (dispatch, getState) => {
   // Headers
   const config = {
