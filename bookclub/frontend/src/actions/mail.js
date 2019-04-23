@@ -22,6 +22,7 @@ export const subscribeToBlog = email => (dispatch, getState) => {
       .then(response => {
         if (ok) {
           resolve();
+          dispatch(createMessage({ subscribed: "Subscribed!" }));
         } else {
           throw response;
         }

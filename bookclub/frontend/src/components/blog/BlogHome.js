@@ -47,7 +47,7 @@ class BlogHome extends Component {
             <SubscribeForm />
           </div>
 
-          <div class="blog-links">
+          <div className="blog-links">
             <Link to={ROUTES.ARCHIVE}>Older posts</Link>
           </div>
         </div>

@@ -10,7 +10,7 @@ export class Alerts extends Component {
 
   componentDidUpdate(prevProps) {
     const { error, alert, message } = this.props;
-    
+
     if (error !== prevProps.error) {
       if (error.msg.title) {
         alert.error(`Title: ${error.msg.title.join()}`);
@@ -25,14 +25,15 @@ export class Alerts extends Component {
           alert.error(`${error.msg.email.join()}`);
         }
       }
-      if (error.status && error.status.startsWith("Too Many Requests")){
+      if (error.status && error.status.startsWith("Too Many Requests")) {
         alert.error("Timed out due to repeated requests");
       }
     }
 
-    if (message !== prevProps.message){
+    if (message !== prevProps.message) {
       console.log(message);
       if (message.commentSent) alert.success(message.commentSent);
+      if (message.subscribed) alert.success(message.subscribed);
     }
   }
   render() {
