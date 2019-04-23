@@ -9,10 +9,12 @@
   overflow-x: hidden;
 }
 
-body,
-html {
-  margin: 0;
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+html,
+body {
   padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
 }
 
 p {
@@ -143,16 +145,16 @@ button {
   margin: 0;
   background: var(--c3);
   padding: 1em;
-  margin-left: -10vw;
-  margin-right: 10vw;
+  margin-left: -3em;
+  margin-right: 3em;
 }
 
 .bentry-date {
   margin: 0;
   background: var(--c4);
   padding: 1em;
-  margin-left: 10vw;
-  margin-right: -10vw;
+  margin-left: 3em;
+  margin-right: -3em;
 }
 .header {
   text-align: right;
@@ -217,23 +219,12 @@ button {
 .title-card {
   background: var(--c4);
   height: 10vh;
-
   display: flex;
+  flex-direction: column;
 }
 
-.title-card .name {
-  text-align: left;
-  width: 75vw;
-  margin-bottom: -5vh;
-  margin-top: 5vh;
-  margin-left: 25vw;
-  padding-left: 1em;
-  padding-bottom: 10vh;
-  background: var(--c1);
-  /* border-style: solid;
-  border-right-style: none;
-  border-width: 2px;
-  border-color: var(--c4); */
+.title-card h1 {
+  margin: 0;
 }
 
 .effect3 {
@@ -266,7 +257,6 @@ button {
 
   padding: 2em;
   margin-bottom: 5vh;
-  margin-right: 10vw;
   background: var(--c1);
 
   box-shadow: 0 10px 2px -5px var(--c3);
@@ -309,10 +299,11 @@ button {
   padding-right: 3vw;
 }
 
-.p5wrapper {
-  position: absolute;
+.p5Wrapper {
+  position: fixed;
   z-index: -1;
 }
+
 .fa-stack {
   font-size: 2em;
 }
@@ -407,9 +398,6 @@ textarea:focus {
   padding-left: 2em;
   padding-right: 2em;
 }
-/* XLarge Screens */
-@media screen and (min-width: 1171px) {
-}
 
 .full-width {
   width: 100vw;
@@ -418,6 +406,10 @@ textarea:focus {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+/* XLarge Screens */
+@media screen and (min-width: 1171px) {
 }
 
 /* Large Screens */
@@ -436,8 +428,10 @@ textarea:focus {
     padding-left: 1em;
     padding-right: 1em;
   }
-  .bentry-title {
-    font-size: 120%;
+
+  .bentry {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 
@@ -451,5 +445,14 @@ textarea:focus {
     width: 80vw;
     padding: 1em;
     margin-right: 0;
+  }
+
+  .bentry-title {
+    font-size: 120%;
+    margin: 0;
+  }
+
+  .bentry-date {
+    margin: 0;
   }
 }

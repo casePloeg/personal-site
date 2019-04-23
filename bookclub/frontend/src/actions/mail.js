@@ -1,4 +1,4 @@
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 export const subscribeToBlog = email => (dispatch, getState) => {
   // Headers
   const config = {
@@ -22,6 +22,7 @@ export const subscribeToBlog = email => (dispatch, getState) => {
       .then(response => {
         if (ok) {
           resolve();
+          dispatch(createMessage({ subscribed: "Subscribed!" }));
         } else {
           throw response;
         }

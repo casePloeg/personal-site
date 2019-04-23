@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import SocialIcons from "./common/SocialIcons";
-
+import P5Wrapper from "./P5Wrapper";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +30,15 @@ class Home extends Component {
   render() {
     return (
       <div className="home-wrapper">
+        <P5Wrapper />
         <div className="home">
-          <div className="full-width title-card">
-            <div className="name effect3">
+          {/* <div className="full-width title-card">
+            <div className="name">
               <h1>
                 <Link to={ROUTES.HOME}>Case Ploeg</Link>
               </h1>
             </div>
-          </div>
+          </div> */}
 
           <div className="home-content">
             <p>
