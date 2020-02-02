@@ -47,7 +47,7 @@ class Home extends Component {
               Science at the University of Toronto.
             </p>
             <p>
-              Join my <Link to={ROUTES.BLOG}>bookclub</Link>!
+              <Link to={ROUTES.BLOG}>Bookclub</Link>
             </p>
             <p>case.ploeg[at]gmail.com</p>
           </div>

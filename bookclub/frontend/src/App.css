@@ -156,6 +156,11 @@ button {
   margin-left: 3em;
   margin-right: -3em;
 }
+
+.blog-nav {
+  text-align: center;
+}
+
 .header {
   text-align: right;
   height: 10vh;
