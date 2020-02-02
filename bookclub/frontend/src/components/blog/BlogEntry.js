@@ -29,7 +29,26 @@ class BlogEntryBase extends Component {
         toc: toc,
         frontpage: this.props.frontpage
       }));
-      // });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      let compiled = compile(this.props.body, {});
+      let content = compiled.tree;
+      let toc = compiled.tree;
+      let date = new Date(this.props.created_at);
+      // format the date with moment.js
+      let created = moment(date).format("LL");
+
+      this.setState(prevState => ({
+        id: this.props.id,
+        title: this.props.title,
+        created: created,
+        content: content,
+        toc: toc,
+        frontpage: this.props.frontpage
+      }));
     }
   }
 
@@ -42,8 +61,8 @@ class BlogEntryBase extends Component {
               {this.state.title}
             </Link>
           ) : (
-            this.state.title
-          )}
+              this.state.title
+            )}
         </h2>
 
         <div className="bentry_content">{this.state.content}</div>
@@ -55,8 +74,8 @@ class BlogEntryBase extends Component {
               {this.state.created}
             </Link>
           ) : (
-            this.state.created
-          )}
+              this.state.created
+            )}
         </h4>
         <div />
       </div>
